@@ -3,12 +3,17 @@
 
 #include "BP_BasePawn.h"
 
-// Sets default values
-ABP_BasePawn::ABP_BasePawn()
-{
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+#include "Components/CapsuleComponent.h"
 
+// Sets default values
+ABP_BasePawn::ABP_BasePawn(): CapsuleComponent(nullptr)
+{
+	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+	
+	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
+
+	RootComponent = CapsuleComponent;
 }
 
 // Called when the game starts or when spawned
