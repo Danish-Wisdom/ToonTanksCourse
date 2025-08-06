@@ -21,8 +21,18 @@ ABP_BasePawn::ABP_BasePawn()
 	TurretMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Turret Mesh"));
 	TurretMesh->SetupAttachment(BaseMesh);
 
+    // Find a way to change this into an array in order to implement the ability to have multiple spawn points
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
+
+
+	// for (int32 index = 0; index < NumberOfSpawnPoints; index++)
+	// {
+	// 	USceneComponent* SpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point " +  index));
+	// 	SpawnPoint->SetupAttachment(TurretMesh);
+	//
+	// 	SpawnPoints.Add(SpawnPoint);
+	// }
 }
 
 // Called when the game starts or when spawned

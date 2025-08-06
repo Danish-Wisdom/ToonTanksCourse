@@ -34,18 +34,22 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pawn Variables", meta = (AllowPrivateAccess = true))
 	float Speed = 400.0f;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CompVars", meta = (AllowPrivateAccess = true))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Toon Object", meta = (AllowPrivateAccess = true))
 	class UCapsuleComponent* CapsuleComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CompVars", meta = (AllowPrivateAccess = true))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Toon Object", meta = (AllowPrivateAccess = true))
 	UStaticMeshComponent* BaseMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CompVars", meta = (AllowPrivateAccess = true))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Toon Object", meta = (AllowPrivateAccess = true))
 	UStaticMeshComponent* TurretMesh;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CompVars", meta = (AllowPrivateAccess = true))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Toon Object", meta = (AllowPrivateAccess = true))
 	USceneComponent* ProjectileSpawnPoint;
 
-
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CompVars", meta = (AllowPrivateAccess = true))
+	// int32 NumberOfSpawnPoints = 1;
+	//
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "CompVars", meta = (AllowPrivateAccess = true))
+	// TArray<USceneComponent*> SpawnPoints;
 	
 };
