@@ -49,10 +49,4 @@ void ABP_BasePawn::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void ABP_BasePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
 

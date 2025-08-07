@@ -27,12 +27,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
 
 private:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pawn Variables", meta = (AllowPrivateAccess = true))
-	float Speed = 400.0f;
+	
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Toon Object", meta = (AllowPrivateAccess = true))
 	class UCapsuleComponent* CapsuleComponent;
