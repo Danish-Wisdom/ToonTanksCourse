@@ -5,6 +5,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -20,6 +21,7 @@ ATank::ATank()
 }
 
 
+
 void ATank::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -29,6 +31,32 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponen
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATank::Move);
 		EnhancedInputComponent->BindAction(TurnAction, ETriggerEvent::Triggered, this, &ATank::Turn);
+	}
+}
+
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+
+	PlayerControllerRef = CastChecked<APlayerController>(GetController());
+}
+
+void ATank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (PlayerControllerRef)
+	{
+		FHitResult Hit;
+		PlayerControllerRef->GetHitResultUnderCursor(
+			ECC_Visibility,
+			false,
+			Hit);
+
+		DrawDebugSphere(GetWorld(), Hit.ImpactPoint, 30, 12, FColor::Red, false, -1);
+
+		RotateTurret(Hit.ImpactPoint);
+		
 	}
 }
 
@@ -45,12 +73,22 @@ void ATank::Move(const FInputActionValue& Value)
 	
 	DeltaLocation.Y = InputValue;
 
-	AddActorLocalOffset(DeltaLocation, true);
+	AddActorLocalOffset(DeltaLocation, true); 
 }
 
 void ATank::Turn(const FInputActionValue& Value)
 {
-	
+	FString ValueString = Value.ToString();
+	UE_LOG(LogTemp, Display, TEXT("Turn Input: %s"), *ValueString);
+
+	FRotator DeltaRotation(0.f);
+	float InputValue = Value.Get<float>();
+
+	InputValue = InputValue * UGameplayStatics::GetWorldDeltaSeconds(this) * TurnRate;
+
+	DeltaRotation.Yaw = InputValue;
+
+	AddActorLocalRotation(DeltaRotation);
 }
 
 

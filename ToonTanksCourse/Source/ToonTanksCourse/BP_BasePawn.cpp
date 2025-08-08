@@ -3,6 +3,7 @@
 
 #include "BP_BasePawn.h"
 
+#include "Tank.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -35,18 +36,13 @@ ABP_BasePawn::ABP_BasePawn()
 	// }
 }
 
-// Called when the game starts or when spawned
-void ABP_BasePawn::BeginPlay()
+void ABP_BasePawn::RotateTurret(FVector Target)
 {
-	Super::BeginPlay();
-	
+	FVector ToTarget = Target - TurretMesh->GetComponentLocation();
+	FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.0f);
+
+	TurretMesh->SetWorldRotation(LookAtRotation);
 }
 
-// Called every frame
-void ABP_BasePawn::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
 
 
