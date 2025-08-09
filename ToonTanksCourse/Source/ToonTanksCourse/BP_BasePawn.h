@@ -22,8 +22,12 @@ public:
 
 
 protected:
-	void RotateTurret(FVector Target);
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	float RotationSpeed = 10.f;
 	
+	void RotateTurret(FVector Target);
+
+	void Fire();
 
 	
 
@@ -41,6 +45,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Toon Object", meta = (AllowPrivateAccess = true))
 	USceneComponent* ProjectileSpawnPoint;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = true))
+	TSubclassOf<class AProjectile> ProjectileClass;
 
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CompVars", meta = (AllowPrivateAccess = true))
 	// int32 NumberOfSpawnPoints = 1;

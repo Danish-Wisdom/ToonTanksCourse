@@ -3,8 +3,9 @@
 
 #include "BP_BasePawn.h"
 
-#include "Tank.h"
+#include "Projectile.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABP_BasePawn::ABP_BasePawn()
@@ -41,8 +42,23 @@ void ABP_BasePawn::RotateTurret(FVector Target)
 	FVector ToTarget = Target - TurretMesh->GetComponentLocation();
 	FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.0f);
 
-	TurretMesh->SetWorldRotation(LookAtRotation);
+	TurretMesh->SetWorldRotation(
+		FMath::RInterpTo(
+			TurretMesh->GetComponentRotation(),
+			LookAtRotation,
+			UGameplayStatics::GetWorldDeltaSeconds(this),
+			RotationSpeed));
 }
 
+void ABP_BasePawn::Fire()
+{
+	FVector SpawnPoint = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator SpawnRotation = ProjectileSpawnPoint->GetComponentRotation();
+	DrawDebugSphere(GetWorld(), SpawnPoint, 30.f, 20, FColor::Emerald, false, 3);
+
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnPoint, SpawnRotation);
+	Projectile->SetOwner(this);
+	
+}
 
 

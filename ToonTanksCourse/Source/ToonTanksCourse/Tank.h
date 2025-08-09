@@ -41,6 +41,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Tank Settings")
 	UInputAction* TurnAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Tank Settings")
+	UInputAction* BoostAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Tank Settings")
+	UInputAction* FireAction;
 	
 	
 private:
@@ -56,9 +61,14 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = true))
 	float TurnRate = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = true))
+	float BoostRate = 2.5f;
 	
 	void Move(const FInputActionValue& Value);
 	void Turn(const FInputActionValue& Value);
+	void Boost(const FInputActionValue& Value);
+	void EndBoost();
 
 	APlayerController* PlayerControllerRef;
 	

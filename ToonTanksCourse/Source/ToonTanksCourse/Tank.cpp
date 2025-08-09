@@ -30,7 +30,13 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponen
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATank::Move);
+		
 		EnhancedInputComponent->BindAction(TurnAction, ETriggerEvent::Triggered, this, &ATank::Turn);
+		
+		EnhancedInputComponent->BindAction(BoostAction, ETriggerEvent::Started, this, &ATank::Boost);
+		EnhancedInputComponent->BindAction(BoostAction, ETriggerEvent::Completed, this, &ATank::EndBoost);
+		
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &ATank::Fire);
 	}
 }
 
@@ -89,6 +95,16 @@ void ATank::Turn(const FInputActionValue& Value)
 	DeltaRotation.Yaw = InputValue;
 
 	AddActorLocalRotation(DeltaRotation);
+}
+
+void ATank::Boost(const FInputActionValue& Value)
+{
+	Speed = (Speed * BoostRate);
+}
+
+void ATank::EndBoost()
+{
+	Speed = (Speed / BoostRate);
 }
 
 
