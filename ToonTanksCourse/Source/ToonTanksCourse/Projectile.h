@@ -7,6 +7,7 @@
 #include "Projectile.generated.h"
 
 
+
 UCLASS()
 class TOONTANKSCOURSE_API AProjectile : public AActor
 {
@@ -33,6 +34,11 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = true))
 	class UProjectileMovementComponent* ProjectileMovement;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Visual FX", meta = (AllowPrivateAccess = true))
+	UParticleSystemComponent* ParticleSystemComponent;
+
+	
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = true))
 	float InitialForce = 2500.f;
 
@@ -49,4 +55,7 @@ private:
 		UPrimitiveComponent* OtherComponent,
 		FVector NormalImpulse,
 		const FHitResult& Hit);
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = true))
+	class UParticleSystem* ProjectileEffect;
 };
