@@ -6,6 +6,16 @@
 #include "Kismet/GameplayStatics.h"
 #include "TimerManager.h"
 
+
+void ATower::HandleDestruction()
+{
+	Super::HandleDestruction();
+
+	Destroy();
+}
+
+
+
 void ATower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

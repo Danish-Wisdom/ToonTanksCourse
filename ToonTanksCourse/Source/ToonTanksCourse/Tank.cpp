@@ -20,6 +20,15 @@ ATank::ATank()
 
 }
 
+void ATank::HandleDestruction()
+{
+	Super::HandleDestruction();
+
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
+
 
 
 void ATank::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -44,17 +53,17 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerControllerRef = CastChecked<APlayerController>(GetController());
+	TankPlayerController = CastChecked<APlayerController>(GetController());
 }
 
 void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (PlayerControllerRef)
+	if (TankPlayerController)
 	{
 		FHitResult Hit;
-		PlayerControllerRef->GetHitResultUnderCursor(
+		TankPlayerController->GetHitResultUnderCursor(
 			ECC_Visibility,
 			false,
 			Hit);
@@ -100,11 +109,13 @@ void ATank::Turn(const FInputActionValue& Value)
 void ATank::Boost(const FInputActionValue& Value)
 {
 	Speed = (Speed * BoostRate);
+	TurnRate = (TurnRate / BoostRate);
 }
 
 void ATank::EndBoost()
 {
 	Speed = (Speed / BoostRate);
+	TurnRate = (TurnRate * BoostRate);
 }
 
 

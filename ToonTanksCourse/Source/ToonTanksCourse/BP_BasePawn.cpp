@@ -37,6 +37,12 @@ ABP_BasePawn::ABP_BasePawn()
 	// }
 }
 
+void ABP_BasePawn::HandleDestruction()
+{
+	// TODO: Visual/Sound effects signifying death
+}
+
+
 void ABP_BasePawn::RotateTurret(FVector Target)
 {
 	FVector ToTarget = Target - TurretMesh->GetComponentLocation();
