@@ -3,6 +3,7 @@
 
 #include "BP_BasePawn.h"
 
+#include "NiagaraComponent.h"
 #include "Projectile.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -27,6 +28,11 @@ ABP_BasePawn::ABP_BasePawn()
 	ProjectileSpawnPoint = CreateDefaultSubobject<USceneComponent>(TEXT("Spawn Point"));
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 
+	DeathParticles = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Death Particle"));
+	DeathParticles->SetupAttachment(RootComponent);
+	DeathParticles->SetVisibility(true, false);
+	
+
 
 	// for (int32 index = 0; index < NumberOfSpawnPoints; index++)
 	// {
@@ -40,6 +46,10 @@ ABP_BasePawn::ABP_BasePawn()
 void ABP_BasePawn::HandleDestruction()
 {
 	// TODO: Visual/Sound effects signifying death
+
+	if (DeathParticles)
+		DeathParticles->Activate(true);
+
 }
 
 

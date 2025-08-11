@@ -34,10 +34,11 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = true))
 	class UProjectileMovementComponent* ProjectileMovement;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Visual FX", meta = (AllowPrivateAccess = true))
-	UParticleSystemComponent* ParticleSystemComponent;
+	// UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Visual FX", meta = (AllowPrivateAccess = true))
+	// UParticleSystemComponent* ParticleSystemComponent;
 
-	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Visual FX", meta = (AllowPrivateAccess = true))
+	class UNiagaraComponent* NiagaraSystemComponent; 
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = true))
 	float InitialForce = 2500.f;

@@ -6,6 +6,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "NiagaraComponent.h"
 
 // Sets default values
 AProjectile::AProjectile()
@@ -20,8 +21,11 @@ AProjectile::AProjectile()
 	ProjectileMovement->InitialSpeed = InitialForce;
 	ProjectileMovement->MaxSpeed = MaxForce;
 
-	ParticleSystemComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleSystemComponent"));
-	ParticleSystemComponent->SetupAttachment(RootComponent);
+	// ParticleSystemComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleSystemComponent"));
+	// ParticleSystemComponent->SetupAttachment(RootComponent);
+
+	NiagaraSystemComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraSystemComponent"));
+	NiagaraSystemComponent->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned

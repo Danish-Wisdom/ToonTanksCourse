@@ -49,6 +49,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = true))
 	TSubclassOf<class AProjectile> ProjectileClass;
 
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Visual FX", meta = (AllowPrivateAccess = true))
+	class UNiagaraComponent* DeathParticles;
+
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CompVars", meta = (AllowPrivateAccess = true))
 	// int32 NumberOfSpawnPoints = 1;
 	//
