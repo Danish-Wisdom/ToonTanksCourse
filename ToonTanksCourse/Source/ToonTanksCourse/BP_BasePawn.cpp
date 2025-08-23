@@ -5,6 +5,7 @@
 
 #include "NiagaraComponent.h"
 #include "Projectile.h"
+#include "Components/AudioComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -32,7 +33,8 @@ ABP_BasePawn::ABP_BasePawn()
 	DeathParticles->SetupAttachment(RootComponent);
 	DeathParticles->SetVisibility(true, false);
 	
-
+	AudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("Audio"));
+	AudioComponent->SetupAttachment(TurretMesh);
 
 	// for (int32 index = 0; index < NumberOfSpawnPoints; index++)
 	// {
@@ -74,6 +76,11 @@ void ABP_BasePawn::Fire()
 
 	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, SpawnPoint, SpawnRotation);
 	Projectile->SetOwner(this);
+
+	if (AudioComponent)
+	{
+		AudioComponent->Play();
+	}
 	
 }
 
